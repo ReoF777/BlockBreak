@@ -3,7 +3,7 @@ import sys
 
 pygame.init()
 
-width = 400
+width = 800
 height = 600
 ballPos = [200, 300]
 boardPos = [200, 500]
@@ -50,26 +50,29 @@ while run:
         else:
             ballPos[0] = 0
             
-    if ballPos[1] > height:
-        ballSpeed[1] *= -1
-        ballPos[1] = height
-    
-    if ballPos[1] < 0:
-        ballSpeed = [5, -5]
+    if ballPos[1] > height: # Collision with floor
+        ballSpeed = [3, -3]
         ballPos = [200, 300]
         score -= 10
+        
     
-    
-    if ballPos[0] > boardPos[0] - 70 and ballPos[0] < boardPos[0] + 70 and ballPos[1] == boardPos[1]:
+    if ballPos[1] < 0: # Collision with ceiling
+        ballSpeed[1] *= -1
+        ballPos[1] = 0
+        
+    if ( # Collision with board
+        ballPos[0] + 10 >= boardPos[0]
+        and ballPos[0] - 10 <= boardPos[0] + 90
+        and ballPos[1] + 10 >= boardPos[1]
+        and ballPos[1] - 10 <= boardPos[1] + 10
+    ):
         ballSpeed[1] *= -1
         score += 10
         
-        
-
     # Draw
     screen.fill(black)
     pygame.draw.circle(screen, red, (ballPos[0], ballPos[1]), 10)
-    pygame.draw.rect(screen, white, (boardPos[0], boardPos[1], 70, 10))
+    pygame.draw.rect(screen, white, (boardPos[0], boardPos[1], 90, 10))
     
     score_text = font.render("Score: " + str(score), True, white)
     screen.blit(score_text, (width - score_text.get_rect().width - 5, 10))
