@@ -1,4 +1,3 @@
-"""
 # Block Breaker Game
 
 This is a simple Block Breaker game implemented in Python using the Pygame library.
@@ -30,6 +29,11 @@ This is a simple Block Breaker game implemented in Python using the Pygame libra
     ```bash
     python block_breaker.py
     ```
+
+
+    
+
+    ![ゲームのスクリーンショット](images/image1.png)
 
     Use the left and right arrow keys to move the paddle.
     Press 'q' to quit the game.
